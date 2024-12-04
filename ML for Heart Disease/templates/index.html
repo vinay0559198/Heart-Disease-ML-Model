@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Heart Disease Prediction</h1>
+    <form method="POST" action="/predict">
+        <label for="age">Age:</label>
+        <input type="number" name="age" step="0.1" required><br>
+        <label for="sex">Sex (1: Male, 0: Female):</label>
+        <input type="number" name="sex" step="1" required><br>
+        <label for="chest_pain_type">Chest Pain Type:</label>
+        <input type="number" name="chest_pain_type" step="1" required><br>
+        <label for="resting_blood_pressure">Resting Blood Pressure:</label>
+        <input type="number" name="resting_blood_pressure" step="0.1" required><br>
+        <label for="serum_cholesterol">Serum Cholesterol:</label>
+        <input type="number" name="serum_cholesterol" step="0.1" required><br>
+        <label for="fasting_blood_sugar">Fasting Blood Sugar:</label>
+        <input type="number" name="fasting_blood_sugar" step="1" required><br>
+        <label for="resting_ecg">Resting ECG:</label>
+        <input type="number" name="resting_ecg" step="1" required><br>
+        <label for="max_heart_rate">Max Heart Rate:</label>
+        <input type="number" name="max_heart_rate" step="1" required><br>
+        <label for="exercise_induced_angina">Exercise Induced Angina:</label>
+        <input type="number" name="exercise_induced_angina" step="1" required><br>
+        <label for="oldpeak">Oldpeak:</label>
+        <input type="number" name="oldpeak" step="0.1" required><br>
+        <label for="st_segment">ST Segment:</label>
+        <input type="number" name="st_segment" step="1" required><br>
+        <label for="major_vessels">Major Vessels:</label>
+        <input type="number" name="major_vessels" step="1" required><br>
+        <label for="thal">Thal:</label>
+        <input type="number" name="thal" step="1" required><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if result %}
+    <h2>Prediction Result</h2>
+    <p>{{ result.prediction }}</p>
+    <p>Probability: {{ result.probability }}</p>
+    <h3>Test Levels</h3>
+    <ul>
+        {% for test, level in result.test_levels.items() %}
+        <li>{{ test }}: {{ level }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
